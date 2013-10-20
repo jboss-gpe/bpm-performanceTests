@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="LibreOffice 3.5  (Linux)">
+	<META NAME="CREATED" CONTENT="0;0">
+	<META NAME="CHANGED" CONTENT="20130316;2535800">
+	<STYLE TYPE="text/css">
+	<!--
+		@page { margin: 0.79in }
+		P { margin-bottom: 0.08in }
+		PRE { font-family: "Liberation Serif", serif }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="en-US" DIR="LTR">
+<PRE>purpose:
+  - load test harness focused on asynchroneous messaging interface to jbpm5 process engine.  
+    This async messaging interface is implemented by PFP's EJB: org.jboss.processFlow.knowledgeService.KnowledgeSessionMDB
+  - 
+
+<IMG SRC="README_html_m67d0cc09.gif" NAME="graphics1" ALIGN=LEFT WIDTH=664 HEIGHT=348 BORDER=0>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+assumptions:
+    - JBoss runtime has been provisioned via PFP with the following properties set  in $PFP_HOME/build.properties
+        org.jboss.processFlow.provision.pfpCore=true
+        org.jboss.processFlow.ksession.queue=processFlow.knowledgeSessionQueue
+
+usage:
+    - review ../build.properties
+    - from root of project, execute:    ant
+
+note:
+    - human task lifecycle can be manipulated either through appropriate signals to skip or fail a task
+    - otherwise, the human task lifecycle can be completed normally via query/claim/complete functions provided by the task service
+</PRE>
+</BODY>
+</HTML>

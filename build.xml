@@ -1,0 +1,24 @@
+<project name="jbpm-performanceTests" >
+    <property environment="ENV"/>
+
+    <macrodef name="iterate">
+        <attribute name="target"/>
+        <sequential>
+            <subant target="@{target}">
+                <fileset dir="asyncKService" includes="build.xml"/>
+                <fileset dir="customWorkItemHandler" includes="build.xml"/>
+                <fileset dir="lifecycleViaRest" includes="build.xml"/>
+                <fileset dir="pInstanceSignalConcurrency" includes="build.xml"/>
+                <fileset dir="signalTaskChangeDetails" includes="build.xml"/>
+                <fileset dir="signalViaRest" includes="build.xml"/>
+                <fileset dir="simpleTask" includes="build.xml"/>
+                <fileset dir="simpleTimer" includes="build.xml"/>
+                <fileset dir="threeTasksTest" includes="build.xml"/>
+            </subant>
+        </sequential>
+    </macrodef>
+
+    <target name="test"><iterate target="test"/></target>
+    <target name="clean"><iterate target="clean"/></target>
+
+</project>

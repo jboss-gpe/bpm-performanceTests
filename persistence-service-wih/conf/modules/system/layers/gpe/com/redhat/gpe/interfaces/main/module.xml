@@ -1,0 +1,9 @@
+<module xmlns="urn:jboss:module:1.1" name="com.redhat.gpe.interfaces">
+
+    <resources>
+        <resource-root path="interfaces-1.0.jar"/>
+    </resources>
+
+    <dependencies>
+    </dependencies>
+</module>

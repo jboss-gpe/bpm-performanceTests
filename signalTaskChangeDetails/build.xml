@@ -1,0 +1,27 @@
+<project name="signalTaskChangeDetails" default="test" basedir=".">
+
+    <property name="org.jboss.processFlow.absolutePathToBpmn" value="${basedir}/../base/src/test/resources/task_skip_by_signalIntermediateEvent.bpmn2" />
+    <property environment="ENV"/>
+    <property file="../base.properties" />
+    <path id="classpath" >
+        <path refid="initial.classpath" />
+    </path>
+    <import file="${development.base}/base-build.xml"/>
+    <property file="../build.properties" />
+    <import file="../project-targets.xml"/>
+
+    <target name="test" depends="" description="">
+        <antcall target="testPrep" />
+        <java fork="yes" classname="org.jboss.processFlow.test.SyncClientTest" failonerror="true">
+            <jvmarg value="-Xms16m" />
+            <jvmarg value="-Xmx64m" />
+            <sysproperty key="org.jboss.processFlow.handlerImplementation" value="org.jboss.processFlow.SignalTaskChangeDetails" />
+            <sysproperty key="org.jboss.processFlow.absolutePathToBpmn" value="${org.jboss.processFlow.absolutePathToBpmn}" />
+
+            <!-- jvmarg value="-Xrunjdwp:transport=dt_socket,address=${org.jboss.processFlow.testClient.debuggerPort},server=y,suspend=y" / -->
+            <sysproperty key="log4j.configuration" value="file:${development.base}/conf/test/log4j.xml" />
+            <classpath refid="classpath"/>
+        </java>
+    </target>
+
+</project>

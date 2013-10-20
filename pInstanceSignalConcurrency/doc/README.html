@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="LibreOffice 3.5  (Linux)">
+	<META NAME="CREATED" CONTENT="0;0">
+	<META NAME="CHANGED" CONTENT="20130320;8074500">
+	<STYLE TYPE="text/css">
+	<!--
+		@page { margin: 0.79in }
+		P { margin-bottom: 0.08in }
+		PRE { font-family: "Liberation Serif", serif }
+		A:link { so-language: zxx }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="en-US" DIR="LTR">
+<PRE><B>purpose:</B>
+    - demonstrate ability of PFP's org.jboss.processFlow.knowledgeService.SessionPerPInstanceBean to synchronize concurrent events on the same process instance
+    - without the additional pessimistic lock provided by PFP's SessionPerPInstanceBean on a process instance, the jbpm5 process engine would attempt to concurrently write to that same process instance.
+    - subsequently, OptimisticLockExceptions would be thrown.
+
+<IMG SRC="README_html_7fbce00f.gif" NAME="graphics1" ALIGN=LEFT WIDTH=665 HEIGHT=374 BORDER=0>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<B>usage:</B>
+    ant deploy
+
+    ant
+
+<B>NOTES:</B>
+    <SPAN STYLE="font-weight: normal">- concurrentSignal client invokes PFP kSessionProxy to start a single process instance</SPAN>
+    <SPAN STYLE="font-weight: normal">- concurrentSignal client then spawns multiple threads of itself and concurrently invokes the PFP kSessionProxy to signal on the single process instance</SPAN>
+    - com.example.workItem.WorkItemCompleter  is a custom service task
+    - WorkItemCompleter modifies variables on the same process instance
+    - it never completes the async workItem ... so don't expect the process instance to ever complete</PRE>
+</BODY>
+</HTML>

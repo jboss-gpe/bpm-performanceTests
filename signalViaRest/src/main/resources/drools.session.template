@@ -1,0 +1,7 @@
+new SessionTemplate().{  
+
+    workItemHandlers = [
+        "AsyncWorkItem": new com.example.workItem.AsyncWorkItemHandler(),
+        "WorkItemCompleter": new com.example.workItem.WorkItemCompleter()
+    ]
+};

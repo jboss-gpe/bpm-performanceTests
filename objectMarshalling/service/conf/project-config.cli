@@ -1,0 +1,9 @@
+if (outcome == success) of /deployment=persistenceService.jar:read-resource
+    undeploy persistenceService.jar --all-relevant-server-groups
+end-if
+
+batch
+    # deploy EJB service
+    deploy service/target/service-1.0.jar --name=persistenceService.jar --server-groups=${pfp.core.group}
+
+run-batch

@@ -1,0 +1,16 @@
+<module xmlns="urn:jboss:module:1.1" name="com.redhat.gpe.shared">
+
+    <resources>
+        <resource-root path="shared-1.0.jar"/>
+    </resources>
+
+    <dependencies>
+
+        <!-- JPA annotations so need dependency on this peristence API module -->
+        <module name="javax.persistence.api" />
+
+        <module name="org.hibernate" />
+        <module name="org.javassist" />
+
+    </dependencies>
+</module>

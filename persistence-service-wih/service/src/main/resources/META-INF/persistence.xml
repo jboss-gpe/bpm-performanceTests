@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<persistence
+    version="2.0"
+    xmlns="http://java.sun.com/xml/ns/persistence" 
+             xmlns:orm="http://java.sun.com/xml/ns/persistence/orm" 
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd">
+
+    <persistence-unit name="com.redhat.gpe.jpa" transaction-type="JTA">
+        <jta-data-source>java:jboss/datasources/test-cp-xa</jta-data-source>
+
+        <class>com.redhat.gpe.domain.Customer</class>
+
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+        <properties>
+            <property name="hibernate.dialect" value="${hibernate.dialect}"/>            
+            <property name="hibernate.max_fetch_depth" value="3"/>
+
+            <!-- For details concerning the options, see the following :    http://www.jroller.com/eyallupu/entry/hibernate_s_hbm2ddl_tool -->
+            <property name="hibernate.hbm2ddl.auto" value="${hibernate.hbm2ddl.auto}" />
+            <property name="hibernate.show_sql" value="${hibernate.show.sql}" />
+            <property name="hibernate.format_sql" value="true"/>
+
+            <property name="hibernate.transaction.manager_lookup_class" value="org.hibernate.transaction.JBossTransactionManagerLookup" />
+            <property name="jboss.entity.manager.factory.jndi.name" value="java:/com/redhat/gpe/testEMF"/>
+
+            <!-- BZ 841786: AS7/EAP 6/Hib 4 uses new (sequence) generators which seem to cause problems -->
+            <property name="hibernate.id.new_generator_mappings" value="false" />
+        </properties>        
+    </persistence-unit>
+    
+</persistence>

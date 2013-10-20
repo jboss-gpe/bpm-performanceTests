@@ -1,0 +1,17 @@
+import org.drools.process.core.datatype.impl.type.StringDataType;
+
+[
+
+  [
+    "name" : "AsyncWorkItem",
+    "parameters" : [
+        "taskVarIn" : new StringDataType()
+    ],
+    "results" : [
+        "taskVarOut" : new StringDataType()
+    ],
+    "displayName" : "AsyncWorkItem",
+    "icon" : "",
+  ]
+     
+]

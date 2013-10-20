@@ -1,0 +1,6 @@
+new SessionTemplate().{  
+
+    workItemHandlers = [
+        "HelloWorkItem": new com.redhat.gpe.wih.PersistenceServiceWIH()
+    ]
+};

@@ -1,0 +1,9 @@
+<jboss-deployment-structure xmlns="urn:jboss:deployment-structure:1.1">
+    <deployment>
+        <dependencies>
+            <module name="com.redhat.gpe.interfaces" />
+            <module name="org.spring" export="true" meta-inf="export" />
+        </dependencies>
+    </deployment>
+
+</jboss-deployment-structure>

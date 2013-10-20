@@ -1,0 +1,25 @@
+# datasource configuration to test database
+if (outcome != success) of /profile=pfpCore/subsystem=datasources/xa-data-source=test-cp-xa:read-attribute(name=enabled)
+
+    /profile=pfpCore/subsystem=datasources/xa-data-source=test-cp-xa:add(jndi-name=java:jboss/datasources/test-cp-xa,driver-name=${jdbc.module.name},user-name=${test.db.user},password=${test.db.password},max-pool-size=5,min-pool-size=1,xa-datasource-class=${test.xa.datasource.class})
+    /profile=pfpCore/subsystem=datasources/xa-data-source=test-cp-xa/xa-datasource-properties=ServerName/:add(value=${test.db.ip})
+    /profile=pfpCore/subsystem=datasources/xa-data-source=test-cp-xa/xa-datasource-properties=DatabaseName/:add(value=${test.db.name})
+    /profile=pfpCore/subsystem=datasources/xa-data-source=test-cp-xa/:write-attribute(name=new-connection-sql,value="select 1;")
+    /profile=pfpCore/subsystem=datasources/xa-data-source=test-cp-xa:enable()
+end-if
+
+
+if (outcome == success) of /deployment=persistenceService.jar:read-resource
+    undeploy persistenceService.jar --all-relevant-server-groups
+end-if
+
+if (outcome == success) of /server-group=${pfp.core.group}/system-property=test.persist.with.JPA:read-attribute(name=value)
+    /server-group=${pfp.core.group}/system-property=test.persist.with.JPA:remove
+end-if
+
+batch
+    # deploy EJB service
+    /server-group=${pfp.core.group}/system-property=test.persist.with.JPA/:add(value=${test.persist.with.JPA},boot-time=false)
+    deploy service/target/service-1.0.jar --name=persistenceService.jar --server-groups=${pfp.core.group}
+
+run-batch

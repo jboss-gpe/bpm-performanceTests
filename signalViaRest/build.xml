@@ -1,0 +1,48 @@
+<project name="signalViaRest" default="test" basedir=".">
+
+    <property name="org.jboss.processFlow.absolutePathToBpmn" value="${basedir}/../base/src/test/resources/signalAsyncWorkItems.bpmn2" />
+    <property environment="ENV"/>
+    <property file="../base.properties" />
+    <import file="${development.base}/base-build.xml"/>
+    <path id="classpath" >
+        <path refid="initial.classpath" />
+    </path>
+    <property file="../build.properties" />
+    <import file="../project-targets.xml"/>
+
+
+    <target name="deploy" description="" depends="clean" >
+        <antcall target="jar" >
+            <param name="jar.name" value="${organization.name}-${ant.project.name}" />
+            <param name="include.resources" value="false" />
+            <param name="src.path" value="../base/src/main/java" />
+        </antcall>
+        <antcall target="filter">
+            <param name="source.dir" value="conf"/>
+            <param name="dest.dir" value="${jboss.home}"/>
+        </antcall>
+        <copy file="${build.dir}/${organization.name}-${ant.project.name}.jar" todir="${project.module.path}/com/example/workItem/main" overwrite="true" />
+        <copy file="src/main/resources/drools.session.template" tofile="${drools.session.template.path}" overwrite="true" />
+        <antcall target="local.bounce.pfp.core" />
+    </target>
+
+    <target name="test" depends="" description="">
+        <antcall target="testPrep" />
+        <java fork="yes" classname="org.jboss.processFlow.test.SyncClientTest" failonerror="true">
+            <jvmarg value="-Xms16m" />
+            <jvmarg value="-Xmx64m" />
+            <sysproperty key="org.jboss.processFlow.handlerImplementation" value="org.jboss.processFlow.SignalAsyncWorkItems" />
+
+            <!--jvmarg value="-Xrunjdwp:transport=dt_socket,address=${org.jboss.processFlow.testClient.debuggerPort},server=y,suspend=${org.jboss.processFlow.suspend.client.debugger}" / -->
+            <sysproperty key="org.jboss.processFlow.absolutePathToBpmn" value="${org.jboss.processFlow.absolutePathToBpmn}" />
+            <sysproperty key="processId" value="${org.jboss.processFlow.signalViaRest.process.id}" />
+            <sysproperty key="log4j.configuration" value="file:${development.base}/conf/test/log4j.xml" />
+            <classpath refid="classpath"/>
+        </java>
+    </target>
+
+    <target name="clean" >
+        <delete dir="${build.dir}" />
+    </target>
+
+</project>

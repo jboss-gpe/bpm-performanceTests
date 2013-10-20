@@ -1,0 +1,7 @@
+new SessionTemplate().{  
+
+    workItemHandlers = [
+        "createBatchedCollections": new com.example.workItem.CreateBatchedCollections(),
+        "startPInstanceAsyncAndWait": new com.example.workItem.StartPInstanceAsyncAndWait()
+    ]
+};

@@ -1,0 +1,10 @@
+deploy
+local.bounce.all.servers
+local.bounce.brms.webs
+local.bounce.pfp.core
+local.bounce.sy
+local.eap.cli.gui
+local.print.eap.cli
+local.stop.master
+print.classpath
+test

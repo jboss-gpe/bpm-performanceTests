@@ -1,0 +1,33 @@
+<project name="project-targets" >
+
+    <target name="testPrep" >
+        <antcall target="clean" />
+        <mkdir dir="${build.dir}" />
+        <javac debug="true" srcdir="../base/src/test/java" destdir="${build.dir}" optimize="true">
+            <classpath refid="classpath" />
+        </javac>
+        <javac debug="true" srcdir="src/test/java" destdir="${build.dir}" optimize="true">
+            <classpath refid="classpath" />
+        </javac>
+        <math result="pfp.core.remoting.port" operand1="${base.remoting.port}" operation="+" operand2="${pfp.core.base.port.offset}" datatype="int"/>
+        <math result="calculated.hornetq.remoting.port" operand1="${base.remoting.port}" operation="+" operand2="${ha.group.port.offset}" datatype="int"/>
+        <property name="configurable.pfp.core.host.name" value="${pfp.core.host.name}" />
+        <antcall target="filter">
+            <param name="source.dir" value="../"/>
+            <param name="file.name" value="build.properties"/>
+            <param name="dest.dir" value="${build.dir}"/>
+        </antcall>
+        <antcall target="filter">
+            <param name="source.dir" value="../base/src/test/resources"/>
+            <param name="dest.dir" value="${build.dir}"/>
+        </antcall>
+
+        <move file="${build.dir}/build.properties" tofile="${build.dir}/jbpm-performanceTests.properties" />
+    </target> 
+
+    <target name="clean" >
+        <delete dir="${build.dir}" />
+    </target>
+
+
+</project>
