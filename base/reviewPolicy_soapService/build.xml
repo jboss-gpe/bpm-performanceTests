@@ -1,0 +1,18 @@
+<project name="ws_ServiceTask" default="deploy" basedir=".">
+
+    <property environment="ENV"/>
+    <property file="../../build.properties" />
+    <property file="${development.base}/build.properties" />
+    <import file="${development.base}/base-build.xml"/>
+
+    <target name="deploy" depends="" description="">
+        <exec executable="mvn" failonerror="true" dir="." >
+            <arg value="clean" />
+            <arg value="package" />
+        </exec>
+        <antcall target="cli.batch">
+            <param name="cli.source.dir" value="conf/"/>
+            <param name="cli.to.filter.and.execute" value="project-config.cli"/>
+        </antcall>
+    </target>
+</project>

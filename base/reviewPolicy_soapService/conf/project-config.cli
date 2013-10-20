@@ -1,0 +1,3 @@
+batch
+deploy target/reviewPolicy-1.0.war --name=reviewPolicy.war --server-groups=${bpm.core.group}
+run-batch

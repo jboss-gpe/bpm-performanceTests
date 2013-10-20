@@ -1,0 +1,92 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.jboss.processFlow.ptests</groupId>
+    <artifactId>parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <groupId>org.jboss.processFlow.ptests</groupId>
+  <artifactId>simpleTask</artifactId>
+  <packaging>jar</packaging>
+
+  <dependencies>
+    
+    <dependency>
+        <groupId>org.jboss.processFlow.ptests.base</groupId>
+        <artifactId>ejb</artifactId>
+        <version>${version.project}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.jboss.processFlow.services</groupId>
+        <artifactId>interfaces</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.acme.insurance</groupId>
+        <artifactId>insurancepolicy-model</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.kie</groupId>
+        <artifactId>kie-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.spec.javax.ejb</groupId>
+      <artifactId>jboss-ejb-api_3.1_spec</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.jmeter</groupId>
+        <artifactId>ApacheJMeter_java</artifactId>
+    </dependency>
+  </dependencies>
+
+  <!-- jmeter maven plugin:  usage:   mvn clean verify  -->
+  <build>
+    <plugins>
+        <plugin>
+            <groupId>com.lazerycode.jmeter</groupId>
+            <artifactId>jmeter-maven-plugin</artifactId>
+            <version>1.8.1</version>
+            <executions>
+                <execution>
+                    <id>jmeter-tests</id>
+                    <phase>verify</phase>
+                    <goals>
+                        <goal>jmeter</goal>
+                    </goals>
+                </execution>
+            </executions>
+            <configuration>
+                <propertiesSystem>
+                    <!-- test uses EAP6 EJB remoting: need to provide path to ejb client property file -->
+                    <jboss.ejb.client.properties.file.path>${absolute.path.ejb.client.props}</jboss.ejb.client.properties.file.path>
+                    <processId>simpleTask</processId>
+                    <driverName>Alex</driverName>
+                    <age>20</age>
+                    <numberOfAccidents>0</numberOfAccidents>
+                    <numberOfTickets>1</numberOfTickets>
+                    <vehicleYear>2009</vehicleYear>
+                </propertiesSystem>
+            </configuration>
+            <dependencies>
+                <dependency>
+                    <groupId>org.jboss.spec</groupId>
+                    <artifactId>jboss-javaee-6.0</artifactId>
+                    <version>${version.org.jboss.spec.jboss.javaee.6.0}</version>
+                    <type>pom</type>
+                </dependency>
+                <dependency>
+                    <groupId>org.jboss.processFlow.ptests.base</groupId>
+                    <artifactId>ejb</artifactId>
+                    <version>${version.project}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.jboss.processFlow.ptests</groupId>
+                    <artifactId>simpleTask</artifactId>
+                    <version>${version.project}</version>
+                </dependency>
+            </dependencies>
+        </plugin>
+    </plugins>
+  </build>
+
+</project>
