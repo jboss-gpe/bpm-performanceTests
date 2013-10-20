@@ -22,7 +22,7 @@
 
   <modules>
       <module>base</module>
-      <module>simpleTask</module>
+      <module>policyQuoteTask</module>
   </modules>
 
   <repositories>
