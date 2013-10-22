@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 
+import java.io.Writer;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
@@ -49,6 +52,7 @@ public class PolicyQuoteTaskClient extends AbstractJavaSamplerClient {
         processId = System.getProperty(PROCESS_ID, "policyQuoteTask");
         userId = System.getProperty(USER_ID, "jboss");
 
+
         Map<String, Object> parameters = new HashMap<String, Object>();
         parameters.put(Driver.DRIVER_NAME, System.getProperty(Driver.DRIVER_NAME, "Azra"));
         parameters.put(Driver.AGE, context.getIntParameter(Driver.AGE, 20));
@@ -79,23 +83,23 @@ public class PolicyQuoteTaskClient extends AbstractJavaSamplerClient {
             sBuilder.append("pInstanceId = "+pInstanceId);
 
             // sleep for two seconds to ensure all has been flushed to database prior to querying
-            Thread.sleep(2000);
+            Thread.sleep(1000);
 
             // query for tasks by pInstanceId
             List<TaskSummary> tasks = tProxy.getTasksAssignedAsPotentialOwner(userId, ITaskService.ENGLISH);
-            TaskSummary tObj = tasks.get(0);
-            sBuilder.append("taskId = "+tObj.getId());
+            Long taskId = tasks.get(0).getId();
+            sBuilder.append("taskId = "+taskId);
 
             // claim task
-            tProxy.claimTask(tObj.getId(), userId);
+            tProxy.claimTask(taskId, userId);
 
             // start task
-            tProxy.startTask(tObj.getId(), userId);
+            tProxy.startTask(taskId, userId);
 
             // complete task
             parameters = new HashMap<String, Object>();
             parameters.put("taskPrice", new Integer(450));
-            tProxy.completeTask(tObj.getId(), parameters, userId);
+            tProxy.completeTask(taskId, parameters, userId);
 
             results.setResponseMessage(sBuilder.toString());
             results.setSuccessful(true);
@@ -106,11 +110,21 @@ public class PolicyQuoteTaskClient extends AbstractJavaSamplerClient {
             sBuilder.append(x.getCause());
             results.setResponseMessage(sBuilder.toString());
             results.setSuccessful(false);
-        } catch(Exception x) {
-            throw new RuntimeException(x);
+            log.error("runTest exception = "+getStackTrace(x));
+        } catch(Throwable x) {
+            log.error("runTest exception = "+getStackTrace(x));
+            results.setResponseMessage(x.getLocalizedMessage());
+            results.setSuccessful(false);
         }
 
         results.sampleEnd();
         return results;
+    }
+
+    public static String getStackTrace(Throwable aThrowable) {
+        Writer result = new StringWriter();
+        PrintWriter printWriter = new PrintWriter(result);
+        aThrowable.printStackTrace(printWriter);
+        return result.toString();
     }
 }
