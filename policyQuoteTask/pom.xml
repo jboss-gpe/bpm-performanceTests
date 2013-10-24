@@ -84,6 +84,11 @@
                     <artifactId>policyQuoteTask</artifactId>
                     <version>${version.project}</version>
                 </dependency>
+                <dependency>
+                    <groupId>org.jbpm</groupId>
+                    <artifactId>jbpm-human-task-core</artifactId>
+                    <version>${version.drools}</version>
+                </dependency>
             </dependencies>
         </plugin>
     </plugins>

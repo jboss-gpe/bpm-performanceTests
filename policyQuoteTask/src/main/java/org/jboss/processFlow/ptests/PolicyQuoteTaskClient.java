@@ -69,6 +69,10 @@ public class PolicyQuoteTaskClient extends AbstractJavaSamplerClient {
         }
         log.info("runTest() pVariables = "+sBuilder.toString());
 
+        // 0)  check WorkItemHandlers
+        String workItemHandlerDump = kProxy.printWorkItemHandlers(deploymentId);
+        log.info("runtTest() workItemHandlers = "+workItemHandlerDump);
+
         // 1)  start new process
         final long sendTime = System.currentTimeMillis();
         long pInstanceId = 0L;
@@ -86,9 +90,11 @@ public class PolicyQuoteTaskClient extends AbstractJavaSamplerClient {
             Thread.sleep(1000);
 
             // query for tasks by pInstanceId
-            List<TaskSummary> tasks = tProxy.getTasksAssignedAsPotentialOwner(userId, ITaskService.ENGLISH);
+            List<Status> statuses = new ArrayList();
+            statuses.add(Status.Ready);
+            List<TaskSummary> tasks = tProxy.getTasksAssignedAsPotentialOwner(userId, ITaskService.ENGLISH, statuses);
             Long taskId = tasks.get(0).getId();
-            sBuilder.append("taskId = "+taskId);
+            sBuilder.append("  :  taskId = "+taskId);
 
             // claim task
             tProxy.claimTask(taskId, userId);
