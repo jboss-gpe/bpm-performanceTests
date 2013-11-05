@@ -1,0 +1,64 @@
+[main][SyncClientTest] 
+	clientHandler = org.jboss.processFlow.SimpleTaskSyncClient
+	rampUpInterval = 0
+	includeProcessVariables = true
+	useAgent = false
+	abortProcessInstance = false
+	enableLog = true
+	startNewProcessInstance = true
+	useGuaranteedClaimApproach = true
+	debuggerPort = 8887
+	clientCount = 1
+	requestsPerClient = 1
+	absolutePathToBpmn = /u01/projects/bpm-performanceTests/simpleTask/../base/src/test/resources/simpleHumanTask.bpmn2
+	sleepTimeMillis = 1000
+	userId = pfp
+	groupId = creditController
+[main][logging] Logging Provider: org.jboss.logging.Log4jLoggerProvider
+[main][client] JBoss EJB Client version 1.0.23.Final-redhat-1
+[main][EJBClientPropertiesLoader] Looking for jboss-ejb-client.properties using classloader sun.misc.Launcher$AppClassLoader@397b6178
+[main][EJBClientPropertiesLoader] Found jboss-ejb-client.properties using classloader sun.misc.Launcher$AppClassLoader@397b6178
+[main][PropertiesBasedEJBClientConfiguration] endpoint.create.options. has the following options {}
+[main][PropertiesBasedEJBClientConfiguration] remote.connectionprovider.create.options. has the following options {org.xnio.Options.SSL_ENABLED=>false}
+[main][PropertiesBasedEJBClientConfiguration] remote.connection.pfp.connect.options. has the following options {org.xnio.Options.SASL_POLICY_NOANONYMOUS=>false}
+[main][PropertiesBasedEJBClientConfiguration] remote.connection.pfp.channel.options. has the following options {}
+[main][PropertiesBasedEJBClientConfiguration] Connection org.jboss.ejb.client.PropertiesBasedEJBClientConfiguration$RemotingConnectionConfigurationImpl@1824c6ab successfully created for connection named pfp
+[main][PropertiesBasedEJBClientConfiguration] remote.cluster.ejb.connect.options. has the following options {org.xnio.Options.SASL_POLICY_NOANONYMOUS=>false,org.xnio.Options.SSL_ENABLED=>false}
+[main][PropertiesBasedEJBClientConfiguration] remote.cluster.ejb.channel.options. has the following options {}
+[main][PropertiesBasedEJBClientConfiguration] Cluster configuration for cluster ejb successfully created
+[main][ejb3] Registered org.jboss.as.ejb3.remote.EJBTransactionRecoveryService@310f891b as a listener to EJB client context org.jboss.ejb.client.EJBClientContext@6f434304
+[main][xnio] XNIO Version 3.0.7.GA-redhat-1
+[main][nio] XNIO NIO Implementation Version 3.0.7.GA-redhat-1
+[main][remoting] JBoss Remoting version 3.2.16.GA-redhat-1
+[Remoting "config-based-ejb-client-endpoint" read-1][nio] Started channel thread 'Remoting "config-based-ejb-client-endpoint" read-1', selector sun.nio.ch.EPollSelectorImpl@3b0f2591
+[Remoting "config-based-ejb-client-endpoint" write-1][nio] Started channel thread 'Remoting "config-based-ejb-client-endpoint" write-1', selector sun.nio.ch.EPollSelectorImpl@5f6b70e1
+[main][ConfigBasedEJBClientContextSelector] Could not register a EJB receiver for connection to zareason:4697
+java.lang.RuntimeException: Operation failed with status WAITING
+	at org.jboss.ejb.client.remoting.IoFutureHelper.get(IoFutureHelper.java:93)
+	at org.jboss.ejb.client.remoting.ConnectionPool.getConnection(ConnectionPool.java:77)
+	at org.jboss.ejb.client.remoting.RemotingConnectionManager.getConnection(RemotingConnectionManager.java:51)
+	at org.jboss.ejb.client.remoting.ConfigBasedEJBClientContextSelector.setupEJBReceivers(ConfigBasedEJBClientContextSelector.java:146)
+	at org.jboss.ejb.client.remoting.ConfigBasedEJBClientContextSelector.getCurrent(ConfigBasedEJBClientContextSelector.java:115)
+	at org.jboss.ejb.client.remoting.ConfigBasedEJBClientContextSelector.getCurrent(ConfigBasedEJBClientContextSelector.java:47)
+	at org.jboss.ejb.client.EJBClientContext.getCurrent(EJBClientContext.java:271)
+	at org.jboss.ejb.client.EJBClientContext.requireCurrent(EJBClientContext.java:281)
+	at org.jboss.ejb.client.EJBInvocationHandler.doInvoke(EJBInvocationHandler.java:176)
+	at org.jboss.ejb.client.EJBInvocationHandler.invoke(EJBInvocationHandler.java:144)
+	at com.sun.proxy.$Proxy0.addProcessToKnowledgeBase(Unknown Source)
+	at org.jboss.processFlow.test.SyncClientTest.addProcessToKnowledgeBase(SyncClientTest.java:201)
+	at org.jboss.processFlow.test.SyncClientTest.main(SyncClientTest.java:123)
+[main][ConfigBasedEJBClientContextSelector] Registered a reconnect handler in EJB client context org.jboss.ejb.client.EJBClientContext@6f434304 for remote://zareason:4697
+[main][ConfigBasedEJBClientContextSelector] Registered 0 remoting EJB receivers for EJB client context org.jboss.ejb.client.EJBClientContext@6f434304
+[ejb-client-context-tasks-1-thread-1][MaxAttemptsReconnectHandler] Re-connect attempt# 1 failed for zareason:4697
+java.lang.RuntimeException: Operation failed with status WAITING
+	at org.jboss.ejb.client.remoting.IoFutureHelper.get(IoFutureHelper.java:93)
+	at org.jboss.ejb.client.remoting.ConnectionPool.getConnection(ConnectionPool.java:77)
+	at org.jboss.ejb.client.remoting.RemotingConnectionManager.getConnection(RemotingConnectionManager.java:51)
+	at org.jboss.ejb.client.remoting.MaxAttemptsReconnectHandler.tryConnect(MaxAttemptsReconnectHandler.java:63)
+	at org.jboss.ejb.client.remoting.EJBClientContextConnectionReconnectHandler.reconnect(EJBClientContextConnectionReconnectHandler.java:59)
+	at org.jboss.ejb.client.EJBClientContext$ReconnectAttempt.run(EJBClientContext.java:1287)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:471)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:744)

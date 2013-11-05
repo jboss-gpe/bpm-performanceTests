@@ -19,6 +19,7 @@ import javax.naming.Context;
 import org.jboss.processFlow.tasks.ITaskService;
 import org.jboss.processFlow.knowledgeService.IKnowledgeSession;
 
+import org.apache.log4j.xml.DOMConfigurator;
 import org.apache.log4j.Logger;
 
 /**
@@ -29,6 +30,7 @@ import org.apache.log4j.Logger;
 public class SyncClientTest {
 
     public static final String PROPERTIES_FILE_NAME="/jbpm-performanceTests.properties";
+    public static final String PATH_TO_LOG4J_CONFIG = "path.to.log4j.config";
     private static final String ID = "clientId";
     private static final String BIND_ADDRESS = "bindAddress";
     private static final String FINAL_MESSAGE = "FINAL_MESSAGE";
@@ -70,6 +72,9 @@ public class SyncClientTest {
             properties.load(SyncClientTest.class.getResourceAsStream(PROPERTIES_FILE_NAME));
             if(properties.size() == 0)
                 throw new RuntimeException("start() no properties defined in "+PROPERTIES_FILE_NAME);
+
+            String pathToLog4jConfig = (String)properties.getProperty(SyncClientTest.PATH_TO_LOG4J_CONFIG);
+            DOMConfigurator.configure(pathToLog4jConfig);
 
             if(System.getProperty("org.jboss.processFlow.handlerImplementation") == null)
                 throw new Exception("main() must define a value for 'org.jboss.processFlow.handlerImplementation'");

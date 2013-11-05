@@ -12,6 +12,7 @@ import java.util.Properties;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.apache.log4j.xml.DOMConfigurator;
 import org.apache.log4j.Logger;
 
 import org.jbpm.task.Status;
@@ -36,14 +37,14 @@ public class SimpleTaskSyncClient implements Runnable {
     
 
     public SimpleTaskSyncClient(Integer id) throws Exception {
-        this.nodeId = id.toString();
-        taskServiceProxy = SyncClientTest.getTaskServiceProxy();
-        kSessionProxy = SyncClientTest.getKnowledgeSessionProxy();
-
         Properties properties = new Properties();
         properties.load(SimpleTaskSyncClient.class.getResourceAsStream(SyncClientTest.PROPERTIES_FILE_NAME));
         if(properties.size() == 0)
             throw new RuntimeException("start() no properties defined in "+SyncClientTest.PROPERTIES_FILE_NAME);
+
+        String pathToLog4jConfig = (String)properties.getProperty(SyncClientTest.PATH_TO_LOG4J_CONFIG);
+        System.out.println("****** pathToLog4jConfig = "+pathToLog4jConfig);
+        DOMConfigurator.configure(pathToLog4jConfig);
 
         String pString = (String)properties.getProperty("org.jboss.processFlow.claimTask");
         if(pString != null)
@@ -56,6 +57,11 @@ public class SimpleTaskSyncClient implements Runnable {
         sBuilder.append("\n\tclaimTask = "+claimTask);
         sBuilder.append("\n\tcompleteTask = "+completeTask);
         log.info(sBuilder.toString());
+
+        this.nodeId = id.toString();
+        taskServiceProxy = SyncClientTest.getTaskServiceProxy();
+        kSessionProxy = SyncClientTest.getKnowledgeSessionProxy();
+
     }
 
     public void run() {
