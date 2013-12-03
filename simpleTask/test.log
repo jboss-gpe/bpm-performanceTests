@@ -1,64 +1,45 @@
-[main][SyncClientTest] 
-	clientHandler = org.jboss.processFlow.SimpleTaskSyncClient
-	rampUpInterval = 0
-	includeProcessVariables = true
-	useAgent = false
-	abortProcessInstance = false
-	enableLog = true
-	startNewProcessInstance = true
-	useGuaranteedClaimApproach = true
-	debuggerPort = 8887
-	clientCount = 1
-	requestsPerClient = 1
-	absolutePathToBpmn = /u01/projects/bpm-performanceTests/simpleTask/../base/src/test/resources/simpleHumanTask.bpmn2
-	sleepTimeMillis = 1000
-	userId = pfp
-	groupId = creditController
-[main][logging] Logging Provider: org.jboss.logging.Log4jLoggerProvider
-[main][client] JBoss EJB Client version 1.0.23.Final-redhat-1
-[main][EJBClientPropertiesLoader] Looking for jboss-ejb-client.properties using classloader sun.misc.Launcher$AppClassLoader@397b6178
-[main][EJBClientPropertiesLoader] Found jboss-ejb-client.properties using classloader sun.misc.Launcher$AppClassLoader@397b6178
-[main][PropertiesBasedEJBClientConfiguration] endpoint.create.options. has the following options {}
-[main][PropertiesBasedEJBClientConfiguration] remote.connectionprovider.create.options. has the following options {org.xnio.Options.SSL_ENABLED=>false}
-[main][PropertiesBasedEJBClientConfiguration] remote.connection.pfp.connect.options. has the following options {org.xnio.Options.SASL_POLICY_NOANONYMOUS=>false}
-[main][PropertiesBasedEJBClientConfiguration] remote.connection.pfp.channel.options. has the following options {}
-[main][PropertiesBasedEJBClientConfiguration] Connection org.jboss.ejb.client.PropertiesBasedEJBClientConfiguration$RemotingConnectionConfigurationImpl@1824c6ab successfully created for connection named pfp
-[main][PropertiesBasedEJBClientConfiguration] remote.cluster.ejb.connect.options. has the following options {org.xnio.Options.SASL_POLICY_NOANONYMOUS=>false,org.xnio.Options.SSL_ENABLED=>false}
-[main][PropertiesBasedEJBClientConfiguration] remote.cluster.ejb.channel.options. has the following options {}
-[main][PropertiesBasedEJBClientConfiguration] Cluster configuration for cluster ejb successfully created
-[main][ejb3] Registered org.jboss.as.ejb3.remote.EJBTransactionRecoveryService@310f891b as a listener to EJB client context org.jboss.ejb.client.EJBClientContext@6f434304
-[main][xnio] XNIO Version 3.0.7.GA-redhat-1
-[main][nio] XNIO NIO Implementation Version 3.0.7.GA-redhat-1
-[main][remoting] JBoss Remoting version 3.2.16.GA-redhat-1
-[Remoting "config-based-ejb-client-endpoint" read-1][nio] Started channel thread 'Remoting "config-based-ejb-client-endpoint" read-1', selector sun.nio.ch.EPollSelectorImpl@3b0f2591
-[Remoting "config-based-ejb-client-endpoint" write-1][nio] Started channel thread 'Remoting "config-based-ejb-client-endpoint" write-1', selector sun.nio.ch.EPollSelectorImpl@5f6b70e1
-[main][ConfigBasedEJBClientContextSelector] Could not register a EJB receiver for connection to zareason:4697
-java.lang.RuntimeException: Operation failed with status WAITING
-	at org.jboss.ejb.client.remoting.IoFutureHelper.get(IoFutureHelper.java:93)
-	at org.jboss.ejb.client.remoting.ConnectionPool.getConnection(ConnectionPool.java:77)
-	at org.jboss.ejb.client.remoting.RemotingConnectionManager.getConnection(RemotingConnectionManager.java:51)
-	at org.jboss.ejb.client.remoting.ConfigBasedEJBClientContextSelector.setupEJBReceivers(ConfigBasedEJBClientContextSelector.java:146)
-	at org.jboss.ejb.client.remoting.ConfigBasedEJBClientContextSelector.getCurrent(ConfigBasedEJBClientContextSelector.java:115)
-	at org.jboss.ejb.client.remoting.ConfigBasedEJBClientContextSelector.getCurrent(ConfigBasedEJBClientContextSelector.java:47)
-	at org.jboss.ejb.client.EJBClientContext.getCurrent(EJBClientContext.java:271)
-	at org.jboss.ejb.client.EJBClientContext.requireCurrent(EJBClientContext.java:281)
-	at org.jboss.ejb.client.EJBInvocationHandler.doInvoke(EJBInvocationHandler.java:176)
-	at org.jboss.ejb.client.EJBInvocationHandler.invoke(EJBInvocationHandler.java:144)
-	at com.sun.proxy.$Proxy0.addProcessToKnowledgeBase(Unknown Source)
-	at org.jboss.processFlow.test.SyncClientTest.addProcessToKnowledgeBase(SyncClientTest.java:201)
-	at org.jboss.processFlow.test.SyncClientTest.main(SyncClientTest.java:123)
-[main][ConfigBasedEJBClientContextSelector] Registered a reconnect handler in EJB client context org.jboss.ejb.client.EJBClientContext@6f434304 for remote://zareason:4697
-[main][ConfigBasedEJBClientContextSelector] Registered 0 remoting EJB receivers for EJB client context org.jboss.ejb.client.EJBClientContext@6f434304
-[ejb-client-context-tasks-1-thread-1][MaxAttemptsReconnectHandler] Re-connect attempt# 1 failed for zareason:4697
-java.lang.RuntimeException: Operation failed with status WAITING
-	at org.jboss.ejb.client.remoting.IoFutureHelper.get(IoFutureHelper.java:93)
-	at org.jboss.ejb.client.remoting.ConnectionPool.getConnection(ConnectionPool.java:77)
-	at org.jboss.ejb.client.remoting.RemotingConnectionManager.getConnection(RemotingConnectionManager.java:51)
-	at org.jboss.ejb.client.remoting.MaxAttemptsReconnectHandler.tryConnect(MaxAttemptsReconnectHandler.java:63)
-	at org.jboss.ejb.client.remoting.EJBClientContextConnectionReconnectHandler.reconnect(EJBClientContextConnectionReconnectHandler.java:59)
-	at org.jboss.ejb.client.EJBClientContext$ReconnectAttempt.run(EJBClientContext.java:1287)
-	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:471)
-	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
-	at java.lang.Thread.run(Thread.java:744)
+[main][SimpleTaskSyncClient] 
+	claimTask = true
+	completeTask = true
+[pool-1-thread-1][EJBClientPropertiesLoader] Looking for jboss-ejb-client.properties using classloader sun.misc.Launcher$AppClassLoader@397b6178
+[pool-1-thread-1][EJBClientPropertiesLoader] Found jboss-ejb-client.properties using classloader sun.misc.Launcher$AppClassLoader@397b6178
+[pool-1-thread-1][PropertiesBasedEJBClientConfiguration] endpoint.create.options. has the following options {}
+[pool-1-thread-1][PropertiesBasedEJBClientConfiguration] remote.connectionprovider.create.options. has the following options {org.xnio.Options.SSL_ENABLED=>false}
+[pool-1-thread-1][PropertiesBasedEJBClientConfiguration] remote.connection.pfp.connect.options. has the following options {org.xnio.Options.SASL_POLICY_NOANONYMOUS=>false}
+[pool-1-thread-1][PropertiesBasedEJBClientConfiguration] remote.connection.pfp.channel.options. has the following options {}
+[pool-1-thread-1][PropertiesBasedEJBClientConfiguration] Connection org.jboss.ejb.client.PropertiesBasedEJBClientConfiguration$RemotingConnectionConfigurationImpl@158412e1 successfully created for connection named pfp
+[pool-1-thread-1][PropertiesBasedEJBClientConfiguration] remote.cluster.ejb.connect.options. has the following options {org.xnio.Options.SASL_POLICY_NOANONYMOUS=>false,org.xnio.Options.SSL_ENABLED=>false}
+[pool-1-thread-1][PropertiesBasedEJBClientConfiguration] remote.cluster.ejb.channel.options. has the following options {}
+[pool-1-thread-1][PropertiesBasedEJBClientConfiguration] Cluster configuration for cluster ejb successfully created
+[pool-1-thread-1][ejb3] Registered org.jboss.as.ejb3.remote.EJBTransactionRecoveryService@63c126da as a listener to EJB client context org.jboss.ejb.client.EJBClientContext@5aba9dff
+[pool-1-thread-1][xnio] XNIO Version 3.0.7.GA-redhat-1
+[pool-1-thread-1][nio] XNIO NIO Implementation Version 3.0.7.GA-redhat-1
+[pool-1-thread-1][remoting] JBoss Remoting version 3.2.16.GA-redhat-1
+[Remoting "config-based-ejb-client-endpoint" read-1][nio] Started channel thread 'Remoting "config-based-ejb-client-endpoint" read-1', selector sun.nio.ch.EPollSelectorImpl@305e65d9
+[Remoting "config-based-ejb-client-endpoint" write-1][nio] Started channel thread 'Remoting "config-based-ejb-client-endpoint" write-1', selector sun.nio.ch.EPollSelectorImpl@570a25e
+[Remoting "config-based-ejb-client-endpoint" task-4][RemotingConnectionEJBReceiver] Channel Channel ID ade2034c (outbound) of Remoting connection 3c585a96 to zareason/192.168.122.1:4697 opened for context EJBReceiverContext{clientContext=org.jboss.ejb.client.EJBClientContext@5aba9dff, receiver=Remoting connection EJB receiver [connection=org.jboss.ejb.client.remoting.ConnectionPool$PooledConnection@748b61a3,channel=jboss.ejb,nodename=master:pfp-core-0]} Waiting for version handshake message from server
+[Remoting "config-based-ejb-client-endpoint" task-1][remoting] EJBCLIENT000017: Received server version 2 and marshalling strategies [river]
+[pool-1-thread-1][remoting] EJBCLIENT000013: Successful version handshake completed for receiver context EJBReceiverContext{clientContext=org.jboss.ejb.client.EJBClientContext@5aba9dff, receiver=Remoting connection EJB receiver [connection=org.jboss.ejb.client.remoting.ConnectionPool$PooledConnection@748b61a3,channel=jboss.ejb,nodename=master:pfp-core-0]} on channel Channel ID ade2034c (outbound) of Remoting connection 3c585a96 to zareason/192.168.122.1:4697
+[Remoting "config-based-ejb-client-endpoint" task-2][RemotingConnectionEJBReceiver] Received module availability report for 5 modules
+[Remoting "config-based-ejb-client-endpoint" task-2][RemotingConnectionEJBReceiver] Registering module EJBModuleIdentifier{appName='', moduleName='processFlow-knowledgeSessionService', distinctName=''} availability for receiver context EJBReceiverContext{clientContext=org.jboss.ejb.client.EJBClientContext@5aba9dff, receiver=Remoting connection EJB receiver [connection=org.jboss.ejb.client.remoting.ConnectionPool$PooledConnection@748b61a3,channel=jboss.ejb,nodename=master:pfp-core-0]}
+[Remoting "config-based-ejb-client-endpoint" task-2][RemotingConnectionEJBReceiver] Registering module EJBModuleIdentifier{appName='', moduleName='processFlow-taskService', distinctName=''} availability for receiver context EJBReceiverContext{clientContext=org.jboss.ejb.client.EJBClientContext@5aba9dff, receiver=Remoting connection EJB receiver [connection=org.jboss.ejb.client.remoting.ConnectionPool$PooledConnection@748b61a3,channel=jboss.ejb,nodename=master:pfp-core-0]}
+[Remoting "config-based-ejb-client-endpoint" task-2][RemotingConnectionEJBReceiver] Registering module EJBModuleIdentifier{appName='jsr-77', moduleName='jsr-77', distinctName=''} availability for receiver context EJBReceiverContext{clientContext=org.jboss.ejb.client.EJBClientContext@5aba9dff, receiver=Remoting connection EJB receiver [connection=org.jboss.ejb.client.remoting.ConnectionPool$PooledConnection@748b61a3,channel=jboss.ejb,nodename=master:pfp-core-0]}
+[Remoting "config-based-ejb-client-endpoint" task-2][RemotingConnectionEJBReceiver] Registering module EJBModuleIdentifier{appName='', moduleName='processFlow-bamService', distinctName=''} availability for receiver context EJBReceiverContext{clientContext=org.jboss.ejb.client.EJBClientContext@5aba9dff, receiver=Remoting connection EJB receiver [connection=org.jboss.ejb.client.remoting.ConnectionPool$PooledConnection@748b61a3,channel=jboss.ejb,nodename=master:pfp-core-0]}
+[Remoting "config-based-ejb-client-endpoint" task-2][RemotingConnectionEJBReceiver] Registering module EJBModuleIdentifier{appName='', moduleName='processFlow-knowledgeSessionService-web', distinctName=''} availability for receiver context EJBReceiverContext{clientContext=org.jboss.ejb.client.EJBClientContext@5aba9dff, receiver=Remoting connection EJB receiver [connection=org.jboss.ejb.client.remoting.ConnectionPool$PooledConnection@748b61a3,channel=jboss.ejb,nodename=master:pfp-core-0]}
+[Remoting "config-based-ejb-client-endpoint" task-2][ChannelAssociation] Unsupported message received with header 0xffffffff
+[pool-1-thread-1][ConfigBasedEJBClientContextSelector] Registered 1 remoting EJB receivers for EJB client context org.jboss.ejb.client.EJBClientContext@5aba9dff
+[pool-1-thread-1][EJBClientContext] org.jboss.ejb.client.RandomDeploymentNodeSelector@48e6ecc0 deployment node selector selected master:pfp-core-0 node for appname=,modulename=processFlow-knowledgeSessionService,distinctname=
+[pool-1-thread-1][EJBClientContext] org.jboss.ejb.client.RandomDeploymentNodeSelector@48e6ecc0 deployment node selector selected master:pfp-core-0 node for appname=,modulename=processFlow-knowledgeSessionService,distinctname=
+[pool-1-thread-1][SimpleTaskSyncClient] run() nodeId = 1 : created pInstance w/ id = 9 : with following pInstance variables 
+[pool-1-thread-1][SimpleTaskSyncClient] 	bonusAmount = 1500
+[pool-1-thread-1][SimpleTaskSyncClient] 	selectedEmployee = Alex
+[pool-1-thread-1][EJBClientContext] org.jboss.ejb.client.RandomDeploymentNodeSelector@48e6ecc0 deployment node selector selected master:pfp-core-0 node for appname=,modulename=processFlow-taskService,distinctname=
+[pool-1-thread-1][EJBClientContext] org.jboss.ejb.client.RandomDeploymentNodeSelector@48e6ecc0 deployment node selector selected master:pfp-core-0 node for appname=,modulename=processFlow-taskService,distinctname=
+[pool-1-thread-1][SimpleTaskSyncClient] run() nodeId = 1 :	completeTask = 10	counter = 1	duration = 1582
+[pool-1-thread-1][SimpleTaskSyncClient] THREAD_COMPLETE!	1	1	1.582
+[main][SyncClientTest] main() all tasks completed on ExecutorService .... server node counts as follows : 
+[main][SyncClientTest] 	1	1
+[Remoting "config-based-ejb-client-endpoint" task-1][remoting] EJBCLIENT000016: Channel Channel ID ade2034c (outbound) of Remoting connection 3c585a96 to null can no longer process messages
+[Thread-2][RemotingConnectionEJBReceiver] Closing channelChannel ID ade2034c (outbound) of Remoting connection 3c585a96 to null
+[Thread-2][ChannelAssociation] Closing channel Channel ID ade2034c (outbound) of Remoting connection 3c585a96 to null
+[Thread-2][ChannelAssociation] Registering a re-connect handler org.jboss.ejb.client.remoting.EJBClientContextConnectionReconnectHandler@20c2ee77 for broken channel Channel ID ade2034c (outbound) of Remoting connection 3c585a96 to null in EJB client context org.jboss.ejb.client.EJBClientContext@5aba9dff

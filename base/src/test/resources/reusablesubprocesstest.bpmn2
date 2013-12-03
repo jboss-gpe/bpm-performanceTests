@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/bpmn20" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_qMetsFxZEeOX9eKQ_BtfIQ" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" expressionLanguage="http://www.mvel.org/2.0" targetNamespace="http://www.omg.org/bpmn20" typeLanguage="http://www.java.com/javaTypes">
+  <bpmn2:itemDefinition id="_selectedEmployeeItem" structureRef="String"/>
+  <bpmn2:itemDefinition id="_bonusAmountItem" structureRef="Integer"/>
+
+  <!--
+    purpose is to demonstrate that a reusable subprocess will create an instance of both the parent and child process IDs
+  -->
+  <bpmn2:process id="reusablesubprocesstest" drools:packageName="org.jboss.processFlow" drools:version="1" name="Reusable Sub Process Test" isExecutable="true">
+    <bpmn2:property id="selectedEmployee" itemSubjectRef="_selectedEmployeeItem"/>
+    <bpmn2:property id="bonusAmount" itemSubjectRef="_bonusAmountItem"/>
+    <bpmn2:endEvent id="_1549FEBA-E066-43CC-B706-C078A4102D16" drools:bgcolor="#f5deb3" drools:selectable="true" name="EndProcess">
+      <bpmn2:incoming>_C4264DC5-9C7C-46C7-89E3-722B982A48AA</bpmn2:incoming>
+      <bpmn2:terminateEventDefinition id="_qMfUwFxZEeOX9eKQ_BtfIQ"/>
+    </bpmn2:endEvent>
+    <bpmn2:startEvent id="_92B6CAFB-E1F9-47DD-84C9-3D1179A1AA7C" drools:bgcolor="#f5deb3" drools:selectable="true" name="Start">
+      <bpmn2:outgoing>_EAA9ED87-1A84-46EB-A303-2034AD925080</bpmn2:outgoing>
+    </bpmn2:startEvent>
+    <bpmn2:callActivity id="_F87AC9B5-5414-4A77-A222-0765EF86F08B" drools:selectable="true" drools:independent="true" drools:waitForCompletion="true" name="simpleTask" calledElement="simpleTask">
+      <bpmn2:incoming>_EAA9ED87-1A84-46EB-A303-2034AD925080</bpmn2:incoming>
+      <bpmn2:outgoing>_C4264DC5-9C7C-46C7-89E3-722B982A48AA</bpmn2:outgoing>
+    </bpmn2:callActivity>
+    <bpmn2:sequenceFlow id="_EAA9ED87-1A84-46EB-A303-2034AD925080" drools:bgcolor="#000000" drools:selectable="true" sourceRef="_92B6CAFB-E1F9-47DD-84C9-3D1179A1AA7C" targetRef="_F87AC9B5-5414-4A77-A222-0765EF86F08B"/>
+    <bpmn2:sequenceFlow id="_C4264DC5-9C7C-46C7-89E3-722B982A48AA" drools:bgcolor="#000000" drools:selectable="true" sourceRef="_F87AC9B5-5414-4A77-A222-0765EF86F08B" targetRef="_1549FEBA-E066-43CC-B706-C078A4102D16"/>
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram id="_qMfUwVxZEeOX9eKQ_BtfIQ">
+    <bpmndi:BPMNPlane id="_qMfUwlxZEeOX9eKQ_BtfIQ" bpmnElement="reusablesubprocesstest">
+      <bpmndi:BPMNShape id="_qMfUw1xZEeOX9eKQ_BtfIQ" bpmnElement="_1549FEBA-E066-43CC-B706-C078A4102D16">
+        <dc:Bounds height="28.0" width="28.0" x="418.0" y="107.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_qMfUxFxZEeOX9eKQ_BtfIQ" bpmnElement="_92B6CAFB-E1F9-47DD-84C9-3D1179A1AA7C">
+        <dc:Bounds height="30.0" width="30.0" x="90.0" y="109.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_qMfUxVxZEeOX9eKQ_BtfIQ" bpmnElement="_F87AC9B5-5414-4A77-A222-0765EF86F08B">
+        <dc:Bounds height="80.0" width="100.0" x="210.0" y="84.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="_qMfUxlxZEeOX9eKQ_BtfIQ" bpmnElement="_EAA9ED87-1A84-46EB-A303-2034AD925080">
+        <di:waypoint xsi:type="dc:Point" x="105.0" y="124.0"/>
+        <di:waypoint xsi:type="dc:Point" x="260.0" y="124.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_qMfUx1xZEeOX9eKQ_BtfIQ" bpmnElement="_C4264DC5-9C7C-46C7-89E3-722B982A48AA">
+        <di:waypoint xsi:type="dc:Point" x="260.0" y="124.0"/>
+        <di:waypoint xsi:type="dc:Point" x="432.0" y="121.0"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn2:definitions>

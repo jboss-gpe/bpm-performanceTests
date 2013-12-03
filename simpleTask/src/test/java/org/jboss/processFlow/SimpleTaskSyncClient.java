@@ -26,6 +26,8 @@ public class SimpleTaskSyncClient implements Runnable {
 
     private static Logger log = Logger.getLogger("SimpleTaskSyncClient");
     private static final String PROCESS_ID = "simpleTask";
+    //private static final String PROCESS_ID = "reusablesubprocesstest";
+    //private static final String PROCESS_ID = "embeddedsubprocesstest";
 
     private boolean claimTask = true;
     private boolean completeTask = true;
