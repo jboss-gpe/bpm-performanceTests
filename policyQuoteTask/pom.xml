@@ -11,6 +11,13 @@
   <packaging>jar</packaging>
 
   <dependencies>
+
+    <!-- dependency for domain classes such as Policy, Driver & Rejection -->
+    <dependency>
+       <groupId>org.acme.insurance</groupId>
+       <artifactId>policyquote</artifactId>
+       <version>1.0.0</version>
+    </dependency>
     
     <dependency>
         <groupId>org.jboss.processFlow.ptests.base</groupId>
@@ -20,14 +27,18 @@
     <dependency>
         <groupId>org.jboss.processFlow.services</groupId>
         <artifactId>interfaces</artifactId>
-    </dependency>
-    <dependency>
-        <groupId>org.acme.insurance</groupId>
-        <artifactId>insurancepolicy-model</artifactId>
+        <version>${version.processFlow}</version>
     </dependency>
     <dependency>
         <groupId>org.kie</groupId>
         <artifactId>kie-api</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.jboss.spec</groupId>
+        <artifactId>jboss-javaee-6.0</artifactId>
+        <version>${version.org.jboss.spec.jboss.javaee.6.0}</version>
+        <type>pom</type>
+        <scope>import</scope>
     </dependency>
     <dependency>
       <groupId>org.jboss.spec.javax.ejb</groupId>

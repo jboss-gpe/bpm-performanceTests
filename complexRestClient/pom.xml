@@ -1,0 +1,48 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.jboss.processFlow.ptests</groupId>
+    <artifactId>parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <groupId>org.jboss.processFlow.ptests.complexRestClient</groupId>
+  <artifactId>complexRestClient</artifactId>
+  <packaging>pom</packaging>
+
+  <properties>
+
+    <!-- *** CHANGE THESE PROPERTIES AS APPROPRIATE  *** -->
+
+    <!-- deployment and connectivity settings to remote Execution Server -->
+    <deploymentId>org.acme.insurance:policyquote:1.0.0</deploymentId>
+    <deployment.url>http://localhost:8080/business-central</deployment.url>
+    <userId>jboss</userId>
+    <password>brms</password>
+    <processId>policyquote.policyquotetest</processId>
+
+    <!-- process variables past to policyquote process at start-up -->
+    <driverName>azra</driverName>
+    <age>23</age>
+    <numberOfAccidents>0</numberOfAccidents>
+    <numberOfTickets>1</numberOfTickets>
+    <vehicleYear>2010</vehicleYear>
+    <creditScore>850</creditScore>
+    <!-- *********************************************** -->
+
+    <!--deploymentId>git-playground</deploymentId>
+    <deployment.url>http://zareason:8330/kie-jbpm-services</deployment.url>
+    <userId>jboss</userId>
+    <password>brms</password>
+    <processId>simpleTask</processId -->
+    <resteasy.version>2.3.6.Final</resteasy.version>
+  </properties>
+
+
+  <modules>
+      <module>client</module>
+  </modules>
+
+  <dependencyManagement>
+  </dependencyManagement>
+</project>

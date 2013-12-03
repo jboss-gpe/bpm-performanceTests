@@ -1,0 +1,100 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.jboss.processFlow.ptests.complexRestClient</groupId>
+    <artifactId>complexRestClient</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <groupId>org.jboss.processFlow.pTests.complexRestClient</groupId>
+  <artifactId>complexRestClient</artifactId>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.16</version>
+        <configuration>
+          <systemPropertyVariables>
+            <deploymentId>${deploymentId}</deploymentId>
+            <deployment.url>${deployment.url}</deployment.url>
+            <userId>${userId}</userId>
+            <password>${password}</password>
+            <processId>${processId}</processId>
+            <driverName>${driverName}</driverName>
+            <age>${age}</age>
+            <numberOfAccidents>${numberOfAccidents}</numberOfAccidents>
+            <numberOfTickets>${numberOfTickets}</numberOfTickets>
+            <vehicleYear>${vehicleYear}</vehicleYear>
+            <creditScore>${creditScore}</creditScore>
+          </systemPropertyVariables>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+
+    <!-- dependency for domain classes such as Policy, Driver & Rejection -->
+    <dependency>
+       <groupId>org.acme.insurance</groupId>
+       <artifactId>policyquote</artifactId>
+       <version>1.0.0</version>
+    </dependency>
+
+    <!-- kie/drools/jbpm -->
+    <dependency>
+       <groupId>org.kie.remote</groupId>
+       <artifactId>kie-services-client</artifactId>
+    </dependency>
+    <dependency>
+       <groupId>org.kie</groupId>
+       <artifactId>kie-api</artifactId>
+    </dependency>
+
+    <!-- rest -->
+    <dependency>
+      <groupId>org.jboss.spec.javax.servlet</groupId>
+      <artifactId>jboss-servlet-api_3.0_spec</artifactId>
+      <version>1.0.2.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.resteasy</groupId>
+      <artifactId>jaxrs-api</artifactId>
+      <version>${resteasy.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.resteasy</groupId>
+      <artifactId>resteasy-jaxrs</artifactId>
+      <version>${resteasy.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.resteasy</groupId>
+      <artifactId>resteasy-jaxb-provider</artifactId>
+      <version>${resteasy.version}</version>
+    </dependency>
+    <dependency>
+      <!-- resteasy logging -->
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.1</version>
+    </dependency>
+
+    <!-- test -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+      <version>4.9</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <scope>test</scope>
+      <version>1.0.9</version>
+    </dependency>
+  </dependencies>
+
+</project>
+
