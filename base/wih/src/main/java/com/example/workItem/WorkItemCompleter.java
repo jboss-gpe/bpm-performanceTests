@@ -2,17 +2,17 @@ package com.example.workItem;
 
 import java.util.Map;
 
-import org.kie.api.runtime.process.WorkItemHandler;
-import org.kie.api.runtime.process.WorkItem;
-import org.kie.api.runtime.process.WorkItemManager;
+import org.drools.process.instance.WorkItemHandler;
+import org.drools.runtime.process.WorkItem;
+import org.drools.runtime.process.WorkItemManager;
 import org.jboss.processFlow.knowledgeService.IKnowledgeSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
+import org.jboss.processFlow.tasks.handlers.BasePFPTaskHandler;
 
-public class WorkItemCompleter extends BaseWIHandler implements WorkItemHandler {
+public class WorkItemCompleter extends BasePFPTaskHandler implements WorkItemHandler {
 
-    private static Logger log = LoggerFactory.getLogger("WorkItemCompleter");
+    private static Logger log = Logger.getLogger("WorkItemCompleter");
     private static Object lockObj = new Object();
 
     public WorkItemCompleter() {
@@ -38,7 +38,7 @@ public class WorkItemCompleter extends BaseWIHandler implements WorkItemHandler 
         if(jsonPayload != null) {
             log.info("executeWorkItem() jsonPayload = "+jsonPayload);
         }
-        kProxy.completeWorkItem(waitStateWorkItemId, taskWICompleterMap, pInstanceId, null);
+        kSessionProxy.completeWorkItem(waitStateWorkItemId, taskWICompleterMap, pInstanceId, null);
     
         log.info("executeWorkItem() will now execute completeWorkItem on signal branch...");
         manager.completeWorkItem(workItem.getId(), null);

@@ -10,6 +10,22 @@
     <property file="../build.properties" />
     <import file="../project-targets.xml"/>
 
+    <target name="deploy" description="" depends="clean" >
+        <antcall target="filter">
+            <param name="source.dir" value="../base/conf"/>
+            <param name="dest.dir" value="${jboss.home}"/>
+        </antcall>
+        <antcall target="jar" >
+            <param name="jar.name" value="${organization.name}-${ant.project.name}" />
+            <param name="include.resources" value="false" />
+            <param name="src.path" value="../base/wih/src/main/java" />
+        </antcall>
+        <copy file="${build.dir}/${organization.name}-${ant.project.name}.jar" todir="${project.module.path}/com/example/workItem/main" overwrite="true" />
+        <copy file="src/main/resources/drools.session.template" tofile="${drools.session.template.path}" overwrite="true" />
+        <antcall target="local.bounce.pfp.core" />
+    </target>
+
+
     <target name="test" description="">
         <antcall target="testPrep" />
         <java fork="yes" classname="org.jboss.processFlow.test.SyncClientTest" failonerror="true">

@@ -98,7 +98,7 @@ public class SimpleTaskSyncClient implements Runnable {
 
 
             // 4)  complete  workItem
-            //taskServiceProxy.completeTask(claimedTask.getId(), completedTaskHash, SyncClientTest.userId);
+            //kSessionProxy.completeWorkItem();
             SyncClientTest.serverNodeCountHash.putIfAbsent(nodeId, new AtomicInteger(0));
             SyncClientTest.serverNodeCountHash.get(nodeId).incrementAndGet();
             completedCount.incrementAndGet();

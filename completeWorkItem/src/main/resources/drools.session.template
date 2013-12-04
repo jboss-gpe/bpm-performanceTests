@@ -1,0 +1,6 @@
+new SessionTemplate().{  
+
+    workItemHandlers = [
+        "Service Task": new com.example.workItem.SimpleAsyncWorkItemHandler(ksession)
+    ]
+};

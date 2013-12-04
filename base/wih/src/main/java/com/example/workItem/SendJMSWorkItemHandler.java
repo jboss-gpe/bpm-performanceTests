@@ -12,10 +12,10 @@ import org.jboss.processFlow.util.MessagingUtil;
 
 import org.apache.log4j.Logger;
 
-public class AsyncWorkItemHandler implements WorkItemHandler {
+public class SendJMSWorkItemHandler implements WorkItemHandler {
 
     private static final String gwDObjName = "processFlow.testQueue";
-    private static Logger log = Logger.getLogger("AsyncWorkItemHandler");
+    private static Logger log = Logger.getLogger("SendJMSWorkItemHandler");
     private static Connection connectionObj = null;
     private static Destination gwDObj = null;
     
@@ -29,7 +29,7 @@ public class AsyncWorkItemHandler implements WorkItemHandler {
         }
     }
 
-    public AsyncWorkItemHandler() {
+    public SendJMSWorkItemHandler() {
         // make sure whatever is included in this constructor is performant!!
         // this constructor is instantiated with every ksession re-load
     }
